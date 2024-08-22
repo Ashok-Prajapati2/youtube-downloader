@@ -4,22 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Downloader</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-responsive.css') }}">
 </head>
+ <style>
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+}
+
+
+    </style>
 <body>
-    <h1>YouTube Downloader</h1>
-    <form action="{{ url_for('index') }}" method="post">
-        <label for="url">YouTube URL:</label>
-        <input type="text" id="url" name="url" required>
-        <button type="submit">Download</button>
-    </form>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+
+<header class="menu">
+    <div class="menu-content">
+        <div class="logo">ASHOK</div>
+        <ul id="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="https://github.com/Ashok-Prajapati2">About Us</a></li>
+            <li><a href="https://github.com/Ashok-Prajapati2">Portfolio</a></li>
+            <li><a href="https://github.com/Ashok-Prajapati2">Contact</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Section: Start Page -->
+    <section class="start-page">
+        <div class="content">
+            <h1><br>YouTube Videos Downloader</h1>
+            <form action="{{ url_for('index') }}" method="post">
+               <b> <label for="url">YouTube URL:</label></b><br>
+                <input type="text" id="url" name="url" required>
+                <br> <br>
+                <button type="submit">Download</button>
+            </form>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </section>
+
+
+
+</div>
+
+<footer class="footer">
+    <div class="margin">
+        <div class="menu-footer">
+            <a href="#">Home</a>
+            <a href="https://github.com/Ashok-Prajapati2">Privacy Policy</a>
+            <a href="https://github.com/Ashok-Prajapati2">RSS</a>
+            <a href="https://github.com/Ashok-Prajapati2">Facebook</a>
+        </div>
+        <div class="copyright">© 2024. All Rights Reserved ....</div>
+    </div>
+</footer>
+
+<!-- Link to the JS files from your template -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.parallax.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.nicescroll.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
 </html>

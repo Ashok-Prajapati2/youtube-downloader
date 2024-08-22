@@ -44,7 +44,7 @@ def sanitize_filename(filename):
 def get_yt_info(url):
     """Fetch video information using yt-dlp."""
     ydl_opts = {
-        'format': 'bestaudio/best',
+        'format': 'bestvideo+bestaudio/best',
         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
         'noplaylist': True
     }
@@ -60,8 +60,9 @@ def download_video(url, itag):
     global progress
     try:
         ydl_opts = {
-            'format': itag,
-            'noplaylist': True,
+            'format': f'{itag}',
+            'merge_output_format': 'mp4',
+            'noplaylist': False,
             'progress_hooks': [progress_hook], 
             'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
         }

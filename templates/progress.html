@@ -4,53 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Progress</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-responsive.css') }}">
+    <style>
+        /* Ensure the html and body elements take up the full height of the viewport */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Wrapper to handle the flexbox layout */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Content area styling */
+        .content {
+            flex: 1;
+            background: url('{{ url_for('static', filename='img/background/1353085.jpeg') }}') no-repeat center center;
+            background-size: cover;
+            opacity: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header styling */
+        .menu {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+        }
+
+        .menu-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .menu-content .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #menu li {
+            margin-left: 20px;
+        }
+
+        #menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #menu li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styling for the progress display */
+        #progress-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        #progress-display p {
+            margin: 10px 0;
+        }
+
+        #download-link {
+            text-decoration: none;
+            font-weight: bold;
+            color: #00f;
+        }
+
+    </style>
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 <body>
-    <h1>Download Progress</h1>
-    <p>Progress: <span id="progress">0%</span></p>
-    <p>Speed: <span id="speed">0</span></p>
-    <p>ETA: <span id="eta">0</span></p>
-    <p>Size: <span id="size">0</span></p>
-    <p>Downloaded: <span id="downloaded">0</span></p>
-    <a id="download-wait" style="display:inline;">Waiting......</a><br>
-    <p id="download-complate" href="#" style="display:None;  ">Your video has been downloaded successfully.</p><br>
-    <a id="download-link" href="#" style="display:None;text-decoration:none;">Download your file here</a><br>
-    <br>
-    <br><button>
-    <a style="text-decoration:none;" href="{{ url_for('index') }}">Back to Home</a></button>
-    <script>
-        const socket = io.connect('http://' + document.domain + ':' + location.port);
 
-        function removeAnsiCodes(text) {
-            return text.replace(/\x1B\[[0-9;]*m/g, '');
-        }
+<!-- Wrapper for the whole page -->
+<div class="page-wrapper">
 
-        socket.on('progress', function(data) {
-            document.getElementById('progress').textContent = removeAnsiCodes(data.percent) || '0%';
-            document.getElementById('speed').textContent = removeAnsiCodes(data.speed) || '0';
-            document.getElementById('eta').textContent = removeAnsiCodes(data.eta) || '0';
-            document.getElementById('size').textContent = removeAnsiCodes(data.size) || '0';
-            document.getElementById('downloaded').textContent = removeAnsiCodes(data.downloaded) || '0';
-        });
+    <!-- Header -->
+    <header class="menu">
+        <div class="menu-content">
+            <div class="logo">ASHOK</div>
+            <ul id="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">About Us</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">Portfolio</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">Contact</a></li>
+            </ul>
+        </div>
+    </header>
 
-        socket.on('download_complete', function(data) {
-            document.getElementById('download-wait').style.display = 'None';
-            document.getElementById('download-link').style.display = 'inline';
-            document.getElementById('download-link').href = '/complete';
-            document.getElementById('download-link').textContent = 'Download your file here';
-            document.getElementById('download-complate').style.display = 'inline';
-            
-        });
+    <!-- Main Content -->
+    <div class="content">
+        <div id="progress-display">
+            <h1>Download Progress</h1>
+            <p>Progress: <span id="progress">0%</span></p>
+            <p>Speed: <span id="speed">0</span></p>
+            <p>ETA: <span id="eta">0</span></p>
+            <p>Size: <span id="size">0</span></p>
+            <p>Downloaded: <span id="downloaded">0</span></p>
+            <a id="download-wait" style="display:inline;">Waiting...</a><br>
+            <p id="download-complete" style="display:none;">Your video has been downloaded successfully.</p><br>
+            <a id="download-link" href="#" style="display:none;">Download your file here</a><br>
+            <br><br>
+            <button>
+                <a style="text-decoration:none;" href="{{ url_for('index') }}">Back to Home</a>
+            </button>
+        </div>
+    </div>
 
-        socket.on('error', function(data) {
-            alert('Error: ' + data.message);
-        });
-    </script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="margin">
+            <div class="menu-footer">
+                <a href="#">Home</a>
+                <a href="https://github.com/Ashok-Prajapati2">Privacy Policy</a>
+                <a href="https://github.com/Ashok-Prajapati2">RSS</a>
+                <a href="https://github.com/Ashok-Prajapati2">Facebook</a>
+            </div>
+            <div class="copyright">© 2024. All Rights Reserved ....</div>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    function removeAnsiCodes(text) {
+        return text.replace(/\x1B\[[0-9;]*m/g, '');
+    }
+
+    socket.on('progress', function(data) {
+        document.getElementById('progress').textContent = removeAnsiCodes(data.percent) || '0%';
+        document.getElementById('speed').textContent = removeAnsiCodes(data.speed) || '0';
+        document.getElementById('eta').textContent = removeAnsiCodes(data.eta) || '0';
+        document.getElementById('size').textContent = removeAnsiCodes(data.size) || '0';
+        document.getElementById('downloaded').textContent = removeAnsiCodes(data.downloaded) || '0';
+    });
+
+    socket.on('download_complete', function(data) {
+        document.getElementById('download-wait').style.display = 'none';
+        document.getElementById('download-link').style.display = 'inline';
+        document.getElementById('download-link').href = '/complete';
+        document.getElementById('download-link').textContent = 'Download your file here';
+        document.getElementById('download-complete').style.display = 'inline';
+    });
+
+    socket.on('error', function(data) {
+        alert('Error: ' + data.message);
+    });
+</script>
+
 </body>
 </html>
-
-
-
-
-    

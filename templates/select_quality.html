@@ -1,23 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Quality</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-responsive.css') }}">
+    <style>
+        /* Ensure the html and body elements take up the full height of the viewport */
+        h2 {
+            margin: 100px;
+            margin-button:0px;
+            font-size: 20px;
+            color: black;
+        }
+        /* Wrapper to handle the flexbox layout */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4; /* Example background color */
+            /* Optional: Add a background image */
+           /* background-image: url('path/to/your/image.jpg'); 
+            /* background-size: cover; */
+            /* background-repeat: no-repeat; */
+        }
+
+        
+        
+
+
+            /* Footer styling */
+        .footer {
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #ddd; /* Optional: Adds a border to the top of the footer */
+        }
+
+        .footer-content {
+            max-width: 1200px; /* Optional: Centers the content within the footer */
+            margin: 0 auto;
+        }
+        .content {
+            flex: 1;
+
+            background: url('{{ url_for('static', filename='img/background/1352201.jpeg') }}') no-repeat center;
+            background-size: 100vw;
+            opacity: 1;
+
+        }
+
+
+        .content{
+            
+            position: center;
+            line-height:5vh;
+           text-align: center;
+        }
+        form{
+            margin: -5vw;
+        }
+        
+    </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <form id="download-form" method="POST" action="{{ url_for('download') }}">
-        <input type="hidden" name="url" value="{{ url }}">
-        <label for="itag">Select Quality:</label>
-        <select id="itag" name="itag">
-            {% for format in formats %}
-            <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
-            {% endfor %}
-        </select>
-        <button type="submit">Download</button>
-    </form>
+
+<!-- Wrapper for the whole page -->
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="menu">
+        <div class="menu-content">
+            <div class="logo">ASHOK</div>
+            <ul id="menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">About Us</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">Portfolio</a></li>
+                <li><a href="https://github.com/Ashok-Prajapati2">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+
+    <div class="content">
+        <h2>{{ title }}</h2>
+        <form id="download-form" method="POST" action="{{ url_for('download') }}">
+            <input type="hidden" name="url" value="{{ url }}">
+            <b><label for="itag">Select Quality:</label><b>
+            <select id="itag" name="itag">
+                {% for format in formats %}
+                <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
+                {% endfor %}
+            </select><br>
+            <button type="submit">Download</button><br>
         <a href="{{ url_for('index') }}">Go back</a>
+        </form>
+    </div>
+
+
+<footer class="footer">
+    <div class="margin">
+        <div class="menu-footer">
+            <a href="#">Home</a>
+            <a href="https://github.com/Ashok-Prajapati2">Privacy Policy</a>
+            <a href="https://github.com/Ashok-Prajapati2">RSS</a>
+            <a href="https://github.com/Ashok-Prajapati2">Facebook</a>
+        </div>
+        <div class="copyright">© 2024. All Rights Reserved ....</div>
+    </div>
+</footer>
+
+    <!-- Link to the JS files from your template -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.parallax.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nicescroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.sticky.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</div>
+
 </body>
 </html>
