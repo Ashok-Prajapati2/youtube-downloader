@@ -3775,3 +3775,8 @@
 2024-08-22 16:20:53,017 [INFO] 192.168.31.27 - - [22/Aug/2024 16:20:53] "GET /socket.io/?EIO=4&transport=polling&t=P5vjVAz&sid=_2EQE60HELDBYIibAAAQ HTTP/1.1" 200 -
 2024-08-22 16:20:53,046 [INFO] 192.168.31.27 - - [22/Aug/2024 16:20:53] "GET /socket.io/?EIO=4&transport=polling&t=P5vjVBa&sid=_2EQE60HELDBYIibAAAQ HTTP/1.1" 200 -
 2024-08-22 16:21:18,057 [INFO] 192.168.31.27 - - [22/Aug/2024 16:21:18] "GET /socket.io/?EIO=4&transport=websocket&sid=_2EQE60HELDBYIibAAAQ HTTP/1.1" 200 -
+2024-08-22 23:54:29,838 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.27:5000
+2024-08-22 23:54:29,838 [INFO] [33mPress CTRL+C to quit[0m
