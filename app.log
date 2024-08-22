@@ -1829,3 +1829,17 @@
 2024-08-22 12:11:20,874 [INFO] 192.168.31.72 - - [22/Aug/2024 12:11:20] "GET /socket.io/?EIO=4&transport=polling&t=P5uqOGy&sid=iD4gEMC0Q-npAe3mAAAM HTTP/1.1" 200 -
 2024-08-22 12:11:38,321 [INFO] 192.168.31.72 - - [22/Aug/2024 12:11:38] "GET /socket.io/?EIO=4&transport=websocket&sid=iD4gEMC0Q-npAe3mAAAM HTTP/1.1" 200 -
 2024-08-22 12:11:40,443 [INFO] 192.168.31.159 - - [22/Aug/2024 12:11:40] "GET / HTTP/1.1" 200 -
+2024-08-22 13:12:54,832 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.31.27:5000
+2024-08-22 13:12:54,832 [INFO] [33mPress CTRL+C to quit[0m
+2024-08-22 13:12:54,832 [INFO]  * Restarting with stat
+2024-08-22 13:12:55,062 [WARNING]  * Debugger is active!
+2024-08-22 13:12:55,063 [INFO]  * Debugger PIN: 690-258-818
+2024-08-22 13:12:59,583 [INFO] 192.168.31.27 - - [22/Aug/2024 13:12:59] "GET / HTTP/1.1" 200 -
+2024-08-22 13:13:00,596 [INFO] 192.168.31.27 - - [22/Aug/2024 13:13:00] "GET /socket.io/?EIO=4&transport=polling&t=P5v2V7h HTTP/1.1" 200 -
+2024-08-22 13:13:00,616 [INFO] 192.168.31.27 - - [22/Aug/2024 13:13:00] "POST /socket.io/?EIO=4&transport=polling&t=P5v2V7v&sid=K9B_Ak7WDUa8rH57AAAA HTTP/1.1" 200 -
+2024-08-22 13:13:00,620 [INFO] 192.168.31.27 - - [22/Aug/2024 13:13:00] "GET /socket.io/?EIO=4&transport=polling&t=P5v2V7v.0&sid=K9B_Ak7WDUa8rH57AAAA HTTP/1.1" 200 -
+2024-08-22 13:13:00,638 [INFO] 192.168.31.27 - - [22/Aug/2024 13:13:00] "GET /socket.io/?EIO=4&transport=polling&t=P5v2V8G&sid=K9B_Ak7WDUa8rH57AAAA HTTP/1.1" 200 -
+2024-08-22 13:13:09,440 [INFO] 192.168.31.27 - - [22/Aug/2024 13:13:09] "GET /socket.io/?EIO=4&transport=websocket&sid=K9B_Ak7WDUa8rH57AAAA HTTP/1.1" 200 -
