@@ -1,10 +1,8 @@
-name: my-flask-app  
-type: web           
+name: my-flask-app
+type: web
 instances:
   - name: instance-1
-    image: python:3.11.9
+    image: python:3.12.1
     ports:
-      - 8000             
-    env:                
-      FLASK_ENV: production
-    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]  # Command to run
+      - 5000
+    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
