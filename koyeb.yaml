@@ -1,3 +1,4 @@
+---
 name: my-flask-app
 type: web
 instances:

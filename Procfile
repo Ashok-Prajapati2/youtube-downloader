@@ -1,6 +1,9 @@
-koyeb app init "flask-example" \
-               --git "github.com/Ashok-Prajapati2/youtube-downloader" \
-               --git-branch "main" \
-               --ports "5000:http" \
-               --routes "/:5000" \
-               --env "PORT=5000"
+---
+name: flask-example
+type: web
+instances:
+  - name: instance-1
+    image: python:3.12
+    ports:
+      - 5000
+    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
