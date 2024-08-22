@@ -1,9 +1,1 @@
----
-name: flask-example
-type: web
-instances:
-  - name: instance-1
-    image: python:3.12
-    ports:
-      - 5000
-    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+web: gunicorn -w 4 -b 0.0.0.0:5000 app:app
