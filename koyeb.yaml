@@ -6,4 +6,4 @@ instances:
     image: python:3.12
     ports:
       - 5000
-    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+    command: ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
