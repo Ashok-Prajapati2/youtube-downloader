@@ -15,4 +15,4 @@ SERVER_PORT = 5000
 # Logging settings
 LOG_LEVEL = 'DEBUG'
 LOG_FILE = 'app.log'
-DEBUG_MODE = True
+DEBUG_MODE = False
