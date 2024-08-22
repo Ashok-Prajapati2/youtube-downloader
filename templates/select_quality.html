@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Quality</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <form id="download-form" method="POST" action="{{ url_for('download') }}">
+        <input type="hidden" name="url" value="{{ url }}">
+        <label for="itag">Select Quality:</label>
+        <select id="itag" name="itag">
+            {% for format in formats %}
+            <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Download</button>
+    </form>
+        <a href="{{ url_for('index') }}">Go back</a>
+</body>
+</html>

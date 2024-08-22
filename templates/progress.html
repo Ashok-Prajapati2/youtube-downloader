@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Progress</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Download Progress</h1>
+    <p>Progress: <span id="progress">0%</span></p>
+    <p>Speed: <span id="speed">0</span></p>
+    <p>ETA: <span id="eta">0</span></p>
+    <p>Size: <span id="size">0</span></p>
+    <p>Downloaded: <span id="downloaded">0</span></p>
+    <a id="download-wait" style="display:inline;">Waiting......</a><br>
+    <p id="download-complate" href="#" style="display:None;  ">Your video has been downloaded successfully.</p><br>
+    <a id="download-link" href="#" style="display:None;text-decoration:none;">Download your file here</a><br>
+    <br>
+    <br><button>
+    <a style="text-decoration:none;" href="{{ url_for('index') }}">Back to Home</a></button>
+    <script>
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        function removeAnsiCodes(text) {
+            return text.replace(/\x1B\[[0-9;]*m/g, '');
+        }
+
+        socket.on('progress', function(data) {
+            document.getElementById('progress').textContent = removeAnsiCodes(data.percent) || '0%';
+            document.getElementById('speed').textContent = removeAnsiCodes(data.speed) || '0';
+            document.getElementById('eta').textContent = removeAnsiCodes(data.eta) || '0';
+            document.getElementById('size').textContent = removeAnsiCodes(data.size) || '0';
+            document.getElementById('downloaded').textContent = removeAnsiCodes(data.downloaded) || '0';
+        });
+
+        socket.on('download_complete', function(data) {
+            document.getElementById('download-wait').style.display = 'None';
+            document.getElementById('download-link').style.display = 'inline';
+            document.getElementById('download-link').href = '/complete';
+            document.getElementById('download-link').textContent = 'Download your file here';
+            document.getElementById('download-complate').style.display = 'inline';
+            
+        });
+
+        socket.on('error', function(data) {
+            alert('Error: ' + data.message);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+    
