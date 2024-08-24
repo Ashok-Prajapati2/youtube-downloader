@@ -29,12 +29,12 @@ A simple Flask-based YouTube video downloader that allows users to download vide
 
 1. **Clone the Repository**
 
-    
+    ```bash
     git clone https://github.com/Ashok-Prajapati2/youtube-downloader
     cd youtube-downloader
     python3 -m venv venv
     source venv/bin/activate
-    
+    ```
 
 2. **Install Dependencies**
 
