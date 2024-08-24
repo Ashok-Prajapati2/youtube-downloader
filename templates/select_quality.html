@@ -14,16 +14,13 @@
             font-size: 20px;
             color: black;
         }
-        /* Wrapper to handle the flexbox layout */
+       
         .page-wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f4f4f4; /* Example background color */
-            /* Optional: Add a background image */
-           /* background-image: url('path/to/your/image.jpg'); 
-            /* background-size: cover; */
-            /* background-repeat: no-repeat; */
+            background-color: #f4f4f4;
+           
         }
 
         
@@ -86,17 +83,33 @@
 
     <div class="content">
         <h2>{{ title }}</h2>
+
         <form id="download-form" method="POST" action="{{ url_for('download') }}">
-            <input type="hidden" name="url" value="{{ url }}">
-            <b><label for="itag">Select Quality:</label><b>
-            <select id="itag" name="itag">
-                {% for format in formats %}
-                <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
-                {% endfor %}
-            </select><br>
-            <button type="submit">Download</button><br>
-        <a href="{{ url_for('index') }}">Go back</a>
-        </form>
+    <input type="hidden" name="url" value="{{ url }}">
+
+    <b><label for="video_itag">Select Video Quality:</label></b>
+  <select id="video_itag" name="video_itag">
+        <option value="null" selected>None (Audio only)</option>  
+        {% for format in formats %}
+        {% if format['vcodec'] != 'none' %}  
+        <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
+        {% endif %}
+        {% endfor %}
+    </select><br>
+
+    <b><label for="audio_itag">Select Audio Quality:</label></b>
+    <select id="audio_itag" name="audio_itag">
+        {% for format in formats %}
+        {% if format['acodec'] != 'none' %}  <!-- Show only audio formats -->
+        <option value="{{ format['format_id'] }}">{{ format['format'] }} ({{ format['ext'] }})</option>
+        {% endif %}
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Download</button><br>
+    <a href="{{ url_for('index') }}">Go back</a>
+</form>
+
     </div>
 
 

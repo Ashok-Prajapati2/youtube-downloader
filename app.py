@@ -46,6 +46,7 @@ def get_yt_info(url):
     ydl_opts = {
         'format': 'bestvideo+bestaudio/best',
         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
+        'continuedl': True,
         'noplaylist': False,
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
@@ -56,14 +57,19 @@ def get_yt_info(url):
     except Exception as e:
         raise RuntimeError(f"Failed to fetch video info: {str(e)}")
 
-def download_video(url, itag):
+def download_video(url,video_itag,audio_itag):
     """Download video in a background thread."""
     global progress
+    if video_itag == "null":
+        format_option = f'{audio_itag}'
+    else:
+        format_option = f'{video_itag}+{audio_itag}'
     try:
         ydl_opts = {
-            'format': f'{itag}',
+            'format': format_option,
             'merge_output_format': 'mp4',
             'noplaylist': False,
+            'continuedl': True,
             'progress_hooks': [progress_hook], 
             'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(title)s.%(ext)s'),
             'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
@@ -97,14 +103,16 @@ def index():
 
 @app.route('/download', methods=['POST'])
 def download():
-    itag = request.form.get('itag')
+    
     url = request.form.get('url')
+    video_itag = request.form.get('video_itag') 
+    audio_itag = request.form.get('audio_itag')
 
-    if not itag or not url:
+    if not video_itag or not url or not audio_itag:
         flash('Invalid request. Please try again.')
         return redirect(url_for('index'))
     try:
-        thread = threading.Thread(target=download_video, args=(url, itag))
+        thread = threading.Thread(target=download_video, args=(url, video_itag ,audio_itag))
         thread.start()
         return render_template('progress.html',data=progress)
 
@@ -121,4 +129,4 @@ def download_complete():
     return 'File not found', 404
 
 if __name__ == '__main__':
-    socketio.run(app, debug=False)
+    socketio.run(app, debug=True)
