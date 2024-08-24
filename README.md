@@ -21,28 +21,28 @@ A simple Flask-based YouTube video downloader that allows users to download vide
 ### Prerequisites
 
 - Python 3.9+
-- \`yt-dlp\`
+- yt-dlp
 - Flask
-- \`Flask-SocketIO\` (for real-time updates)
+- Flask-SocketIO (for real-time updates)
 
 ### Installation
 
 1. **Clone the Repository**
 
-    \`\`\`bash
+    
     git clone https://github.com/Ashok-Prajapati2/youtube-downloader
     cd youtube-downloader
     python3 -m venv venv
     source venv/bin/activate
-    \`\`\`
+    
 
 2. **Install Dependencies**
 
     You can install the required Python packages using \`pip\`:
 
-    \`\`\`bash
+    
     pip install -r requirements.txt
-    \`\`\`
+    
 
 ### Running the Application
 
@@ -50,9 +50,9 @@ A simple Flask-based YouTube video downloader that allows users to download vide
 
     Use the \`run.py\` file to start the Flask development server:
 
-    \`\`\`bash
+    
     python3 run.py
-    \`\`\`
+    
 
 2. **Access the Application**
 
@@ -75,9 +75,9 @@ This project deployed on platforms  Koyeb.
 1. **Web Page**
 
     Follow Koyeb's documentation to push the code to their platform.
-      \`\`\`bash
+      
     sore-desiree-student098-ee31c4ca.koyeb.app/
-    \`\`\`
+    
 
 2. **Set Up Environment Variables**
 
